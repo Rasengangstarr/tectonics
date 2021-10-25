@@ -33,10 +33,10 @@ void reshape(GLint w, GLint h) {
 	glLoadIdentity();
 	if (w <= h) {
 		// width is smaller, go from -50 .. 50 in width
-		glOrtho(-50.0, 50.0, -50.0/aspect, 50.0/aspect, 0.0, 1.0);
+		glOrtho(-50.0, 50.0, -50.0/aspect, 50.0/aspect, -50.0, 50.0);
 	} else {
 	    // height is smaller, go from -50 .. 50 in height
-	    glOrtho(-50.0*aspect, 50.0*aspect, -50.0, 50.0, -5.0, 5.0);
+	    glOrtho(-50.0*aspect, 50.0*aspect, -50.0, 50.0, -50.0, 50.0);
 	}
 }
 
@@ -44,9 +44,9 @@ int main(int argc, char **argv) {
 	Molecule mol1;
 	Molecule mol2;	
 	mol1.id = 0;	
-	mol1.x = 1;
+	mol1.x = 1.5;
 	mol1.y = 0;
-	mol1.z = 0;
+	mol1.z = 0.5;
 	mol1.size = 2;
 	mol1.vX = 0;
 	mol1.vY = 0;
@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
 	mol2.id = 1;	
 	mol2.x = 0;
 	mol2.y = 10;
-	mol2.z = 0;
+	mol2.z = 0.5;
 	mol2.size = 2;
 	mol2.vX = 0;
 	mol2.vY = 0;

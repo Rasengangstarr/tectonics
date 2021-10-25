@@ -26,6 +26,8 @@ void Molecule::move(Molecule molecules[], int numMol)
 	{
 		vY = vY * -1 * 0.4;
 		y = -30;
+		vX = vX * 0.8;
+		vZ = vZ * 0.8;
 	}
 
 	GLfloat totalVel = sqrt(pow(vX,2) + pow(vY,2) +  pow(vZ,2));
@@ -49,12 +51,12 @@ void Molecule::move(Molecule molecules[], int numMol)
 		{
 			GLfloat overlap = distance - size + otherSize;
 			//there was a collision, so calculate the angles of collision
-			GLfloat alpha = getAngle(x, y, z, molecules[m].x, molecules[m].y, molecules[m].z);
-			GLfloat beta = getAngle2(x, y, z, molecules[m].x, molecules[m].y, molecules[m].z);
+			GLfloat beta = getAngle(x, y, z, molecules[m].x, molecules[m].y, molecules[m].z);
+			GLfloat alpha = getAngle2(x, y, z, molecules[m].x, molecules[m].y, molecules[m].z);
 			//and apply them to the velocity
-			vX = totalVel * sin (alpha + 180) * cos(beta + 180) * 0.6;
-			vY = totalVel * sin (beta + 180) * 0.6; 
-			vZ = totalVel * cos (alpha + 180) * cos(beta + 180) * 0.6;
+			vX = totalVel * sin (alpha) * cos(beta) * 0.4;
+			vY = totalVel * sin (beta) * 0.4; 
+			vZ = totalVel * cos (alpha) * cos(beta) * 0.4;
 			
 			//x -= overlap;	
 			//y -= overlap;	
@@ -74,13 +76,13 @@ void Molecule::move(Molecule molecules[], int numMol)
 GLfloat Molecule::getAngle (GLfloat x1,GLfloat y1,GLfloat z1,GLfloat x2,GLfloat y2,GLfloat z2) 
 {
     GLfloat theta = atan2(z1-z2,x1-x2);
-    return -theta*180/3.1415926;
+    return -theta;
 }
 
 GLfloat Molecule::getAngle2 (GLfloat x1,GLfloat y1,GLfloat z1,GLfloat x2,GLfloat y2,GLfloat z2)
 {
     GLfloat dist=sqrt(pow(x1 - x2,2) + pow(y1 - y2,2) + pow(z1 - z2,2));
     GLfloat dist2=sqrt(pow(x1 - x2,2) + pow(z1 - z2,2));
-    return acos(dist2/dist)*180/3.1415926;
+    return acos(dist2/dist);
 }
 
