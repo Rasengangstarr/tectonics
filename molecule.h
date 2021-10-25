@@ -5,7 +5,13 @@
 
 class Molecule
 {
-    public:
+	private:
+		GLfloat getAngle (GLfloat x1,GLfloat y1,GLfloat z1,GLfloat x2,GLfloat y2,GLfloat z2);
+		GLfloat getAngle2 (GLfloat x1,GLfloat y1,GLfloat z1,GLfloat x2,GLfloat y2,GLfloat z2);
+    
+	
+	public:
+		int id;
         GLfloat x;
         GLfloat y;
         GLfloat z;
@@ -16,7 +22,8 @@ class Molecule
         GLfloat size;
 
         void render();
-        void move();
+        void move(Molecule molecules[], int numMol);
 };
 
 #endif
+
