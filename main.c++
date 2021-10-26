@@ -1,11 +1,10 @@
 #include <GL/glut.h>
 #include "molecule.c++"
 
+static const int NUMMOLS = 1000;
 
-Molecule mols[2];
-
-static const int NUMMOLS = 2;
 static const int FPS = 60;
+Molecule mols[NUMMOLS];
 
 void renderScene(void) {
 
@@ -16,6 +15,14 @@ void renderScene(void) {
 	
 	glFlush();	
 	glutSwapBuffers();
+}
+
+
+float RandomFloat(float a, float b) {
+    float random = ((float) rand()) / (float) RAND_MAX;
+    float diff = b - a;
+    float r = random * diff;
+    return a + r;
 }
 
 void timer(int v) {
@@ -41,28 +48,22 @@ void reshape(GLint w, GLint h) {
 }
 
 int main(int argc, char **argv) {
-	Molecule mol1;
-	Molecule mol2;	
-	mol1.id = 0;	
-	mol1.x = 1.5;
-	mol1.y = 0;
-	mol1.z = 0.5;
-	mol1.size = 2;
-	mol1.vX = 0;
-	mol1.vY = 0;
-	mol1.vZ = 0;	
 	
-	mol2.id = 1;	
-	mol2.x = 0;
-	mol2.y = 10;
-	mol2.z = 0.5;
-	mol2.size = 2;
-	mol2.vX = 0;
-	mol2.vY = 0;
-	mol2.vZ = 0;	
+	for (int i = 0; i < NUMMOLS; i++)
+	{
+		Molecule mol;
+		mol.id = i;
+		mol.x = RandomFloat(-20, 20);
+		mol.y = RandomFloat(-20, 20);
+		mol.z = 0;
+		mol.size = 0.5;
+		mol.temp = 0;
+		mol.vX = RandomFloat(-0.5, 0.5);
+		mol.vY = 0;
+		mol.vZ = 0;
+		mols[i] = mol;
+	}
 
-	mols[0] = mol1;
-	mols[1] = mol2;	
 	
 	// init GLUT and create Window
 	glutInit(&argc, argv);
